@@ -6,6 +6,6 @@ Trata-se de um exemplo em como utilizar os interators e genetators do javaScript
 
 O objeto utilizado foi o [Interators Generators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators 'Documentação JavaScript MDN').
 
-[Repositório do tutorial](https://github.com/ErickWendel/generators-vs-functions-yt 'ErickWendel').
+[Repositório do tutorial](https://github.com/ErickWendel/generators-iterators-yt 'ErickWendel').
 
 Agradecimentos ao canal do YouTube **[Erick Wendel](https://www.youtube.com/c/ErickWendelTreinamentos 'Erick Wendel')** por proposionar cursos de excelente qualidade.
