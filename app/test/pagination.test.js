@@ -31,6 +31,7 @@ describe('Pagination tests', () => {
         pagination.handleRequest.callCount,
         expectedCallCount
       );
+      
     });
     it('should return data from request when succeded');
   });
