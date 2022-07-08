@@ -105,7 +105,7 @@ describe('Pagination tests', () => {
       sandbox.stub(Pagination, Pagination.sleep.name).resolves();
 
       sandbox
-        .stub(pagination.request, pagination.request.handleRequest.name)
+        .stub(pagination, pagination.handleRequest.name)
         .onCall(0)
         .resolves([responseMock[0]])
         .onCall(1)
@@ -113,9 +113,24 @@ describe('Pagination tests', () => {
         .onCall(2)
         .resolves([]);
 
-        sandbox.spy(pagination, pagination.getPaginated.name)
+      sandbox.spy(pagination, pagination.getPaginated.name);
+      const data = { url: 'https://google.com', page: 1 };
 
-        
+      const secondCallExpectation = {
+        ...data,
+        page: responseMock[0].tid
+      };
+
+      const thirdCallExpectation = {
+        ...secondCallExpectation,
+        page: responseMock[1].tid
+      };
+
+      const getFirstArgFromCall = (value) =>
+        pagination.handleRequest.getCall(value).firstArg;
+      assert.deepStrictEqual(getFirstArgFromCall(0), data);
+      assert.deepStrictEqual(getFirstArgFromCall(1), secondCallExpectation);
+      assert.deepStrictEqual(getFirstArgFromCall(2), thirdCallExpectation);
     });
 
     it('should stop requesting request return an empty array');
