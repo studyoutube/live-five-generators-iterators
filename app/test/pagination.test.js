@@ -50,6 +50,8 @@ describe('Pagination tests', () => {
 
       const firstCallArgs = pagination.request.makeRequest.getCall(0).args;
       assert.deepStrictEqual(firstCallArgs, [expectedArgs]);
+
+      assert.ok(Pagination.sleep.calledWithExactly(expectedTimeout));
     });
     it('should return data from request when succeded');
   });
