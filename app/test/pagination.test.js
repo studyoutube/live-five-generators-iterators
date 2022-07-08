@@ -165,7 +165,7 @@ describe('Pagination tests', () => {
 
       // dica valiosa
       const iterator = await pagination.getPaginated(data);
-      const [firstResult, secondReseult] = await Promise.all([
+      const [firstResult, secondResult] = await Promise.all([
         iterator.next(),
         iterator.next()
       ]);
@@ -175,6 +175,12 @@ describe('Pagination tests', () => {
         value: [responseMock[0]]
       };
       assert.deepStrictEqual(firstResult, expectedFirstCall);
+
+      const expectedSecondCall = {
+        done: true,
+        value: undefined
+      };
+      assert.deepStrictEqual(secondResult, expectedSecondCall);
     });
   });
 });
