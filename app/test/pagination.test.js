@@ -23,7 +23,13 @@ describe('Pagination tests', () => {
       pagination.maxRequestTimeout = expectedTimeout;
 
       const error = new Error('timeout');
+
       sandbox.spy(pagination, pagination.handleRequest.name);
+      sandbox.stub(Pagination, Pagination.sleep.name).resolves();
+
+      sandbox
+        .stub(pagination.request, pagination.request.makeRequest.name)
+        .rejects(error);
 
       const dataRequest = { url: 'https://google.com', page: 0 };
       await assert.rejects(pagination.handleRequest(dataRequest), error);
@@ -31,7 +37,6 @@ describe('Pagination tests', () => {
         pagination.handleRequest.callCount,
         expectedCallCount
       );
-      
     });
     it('should return data from request when succeded');
   });
