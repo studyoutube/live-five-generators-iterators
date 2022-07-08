@@ -126,6 +126,21 @@ describe('Pagination tests', () => {
         page: responseMock[1].tid
       };
 
+      /**
+       *
+       * para chamar uma função que é o generator
+       * Array.from(pagination.getPaginated()) => dessa forma ele não espera os dados sob demanda
+       * ele vvai guardar tudo e, memória e só depois jogar no array
+       * const r = pagination.getPaginated()
+       * r.next() => {done: true | false, value: {}}
+       * a melhor forma é usar o for of
+       */
+
+      const gen = pagination.getPaginated(data);
+      for await (const result of gen) {
+        // console.log('page');
+      }
+
       const getFirstArgFromCall = (value) =>
         pagination.handleRequest.getCall(value).firstArg;
       assert.deepStrictEqual(getFirstArgFromCall(0), data);
