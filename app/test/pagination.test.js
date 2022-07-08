@@ -149,7 +149,9 @@ describe('Pagination tests', () => {
     });
 
     it('should stop requesting request return an empty array', async () => {
+      const expectedThreshold = 20;
       const pagination = new Pagination();
+      pagination.threshold = expectedThreshold;
 
       sandbox.stub(Pagination, Pagination.sleep.name).resolves();
 
@@ -181,6 +183,9 @@ describe('Pagination tests', () => {
         value: undefined
       };
       assert.deepStrictEqual(secondResult, expectedSecondCall);
+
+      assert.deepStrictEqual(Pagination.sleep.callCount, 1);
+      assert.ok(Pagination.sleep.calledWithExactly(expectedThreshold));
     });
   });
 });
