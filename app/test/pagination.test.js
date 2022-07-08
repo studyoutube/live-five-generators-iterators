@@ -41,6 +41,15 @@ describe('Pagination tests', () => {
       const firstCallArg = pagination.handleRequest.getCall(lastCall).firstArg;
       const firstCallRetries = firstCallArg.retries;
       assert.deepStrictEqual(firstCallRetries, expectedCallCount);
+
+      const expectedArgs = {
+        url: `${dataRequest.url}?tid=${dataRequest.page}`,
+        method: 'get',
+        timeout: expectedTimeout
+      };
+
+      const firstCallArgs = pagination.request.makeRequest.getCall(0).args;
+      assert.deepStrictEqual(firstCallArgs, [expectedArgs]);
     });
     it('should return data from request when succeded');
   });
