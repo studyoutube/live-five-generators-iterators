@@ -37,6 +37,10 @@ describe('Pagination tests', () => {
         pagination.handleRequest.callCount,
         expectedCallCount
       );
+      const lastCall = 1;
+      const firstCallArg = pagination.handleRequest.getCall(lastCall).firstArg;
+      const firstCallRetries = firstCallArg.retries;
+      assert.deepStrictEqual(firstCallRetries, expectedCallCount);
     });
     it('should return data from request when succeded');
   });
